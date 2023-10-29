@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import '@/assets/tailwind.css'
-import App from './App.vue'
+import router from './vue-router/index.js'
 import SimulatorTop from './Toppage.vue'
 
-createApp(App).mount('#app')
-createApp(SimulatorTop).mount('#simulator')
+
+createApp(SimulatorTop).use(router).mount('#simulator')
