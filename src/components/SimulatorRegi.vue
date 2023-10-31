@@ -1,51 +1,67 @@
 <template>
-<body class="bg-gray-200 h-screen">
-
-  <div class="grid grid-cols-2 grid-rows-2 h-screen">
-      <!-- Placeholder for top-left quadrant -->
-      <div></div>
-  
-      <!-- Placeholder for top-right quadrant -->
-      <div></div>
-  
-      <!-- Placeholder for bottom-left quadrant -->
-      <div></div>
-  
-      <!-- Actual layout in the bottom-right quadrant -->
-      <div class="bg-gray-400 p-4">
-          <!-- Top buttons -->
-          <div class="flex justify-between mb-4">
-              <button class="bg-blue-600 text-white px-4 py-2 rounded">Button1</button>
-              <button class="bg-blue-600 text-white px-4 py-2 rounded">Button2</button>
-          </div>
-  
-          <!-- Calculator layout -->
-          <div class="grid grid-cols-4 gap-4 mb-4">
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">C</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">X</button>
-              <button class="bg-blue-500 text-white p-4 col-span-2 rounded">1</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">2</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">3</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">4</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">5</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">6</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">7</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">8</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">9</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">0</button>
-          </div>
-  
-          <!-- Other buttons -->
-          <div class="grid grid-cols-3 gap-4">
-              <button class="bg-green-600 text-white p-4 col-span-1 rounded">Green1</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">Blue1</button>
-              <button class="bg-green-600 text-white p-4 col-span-1 rounded">Green2</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">Blue2</button>
-              <button class="bg-purple-600 text-white p-4 col-span-1 rounded">Purple</button>
-              <button class="bg-blue-500 text-white p-4 col-span-1 rounded">Blue3</button>
-          </div>
-      </div>
-  </div>
-  
-  </body>
+    <div class="grid grid-cols-2 h-screen">
+        <div class="bg-gray-100">1</div>
+        <div class="bg-red-100">
+            <div class="flex items-center ml-8">
+                <div class="flex flex-col mr-4 ">
+                    <div class="date w-13 h-5 text-center text-black font-bold font-['Inter'] mb-1 mr-4">{{ formattedDate }}
+                    </div>
+                    <div class="time w-15 h-6 text-center text-black text-2xl font-bold font-['Inter'] mr-4">{{
+                        formattedTime }}</div>
+                </div>
+                <div class="relative">
+                    <button @click="toggleDropdown"
+                        class="bg-white border text-3xl border-gray-500 text-green-700 font-bold py-2 px-7 rounded ">
+                        登録
+                    </button>
+                    <!-- Dropdown -->
+                    <div v-if="showDropdown" class="absolute top-fill w-32">
+                        <button
+                            class="bg-white border text-2xl border-gray-500 text-green-700 font-bold py-2 px-3.5 rounded whitespace-no-wrap">
+                            フライヤー
+                        </button>
+                        <button
+                            class="bg-white border text-3xl border-gray-500 text-green-700 font-bold py-2 px-7 rounded">
+                            休止
+                        </button>
+                    </div>
+                </div>
+                <span class="w-10 h-5 text-black font-bold self-start">demo</span>
+            </div>
+        </div>
+        <div class="bg-orange-100">3</div>
+        <div class="bg-amber-100">4</div>
+    </div>
 </template>
+<script>
+import moment from "moment"
+export default {
+    data() {
+        return {
+            currentDateTime: moment(),
+            showDropdown: false
+        }
+    },
+    methods: {
+        toggleDropdown() {
+            this.showDropdown = !this.showDropdown;
+        }
+    },
+    computed: {
+        formattedDate() {
+            return this.currentDateTime.format('MM/DD');
+        },
+        formattedTime() {
+            return this.currentDateTime.format('HH:mm');
+        }
+    },
+    mounted() {
+        this.interval = setInterval(() => {
+            this.currentDateTime = moment();
+        }, 1000);
+    },
+    beforeUnmount() {
+        clearInterval(this.interval);
+    }
+}
+</script>
