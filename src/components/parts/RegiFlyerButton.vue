@@ -1,5 +1,5 @@
 <template>
-    <button v-for="column in columns" :key="column.id" @click="openModal(column)" :id="[column.id]"
+    <button v-for="column in columns" :key="column.id" @click="openModal(column)" @click.self="outsideClick" :id="[column.id]"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         {{ column.label }}</button>
     <div v-if="isModalOpen" 
@@ -19,7 +19,7 @@
                 <button v-if="modalContent.pro4" class="px-4 py-2 bg-white border rounded border-gray-300">{{ modalContent.pro4 }}</button>
             </div>
             <!-- Text Section -->
-            <p class="text-2xl">実際の業務では似たような形態があります。</p>
+            <p class="text-2xl">test</p>
         </div>
     </div>
 </template>
@@ -30,10 +30,10 @@ export default {
             columns: [
                 { label: 'レジ袋', id: 'RegiModal', pro1: 'レジ袋(小)', pro2: 'レジ袋(中)', pro3: 'レジ袋(大)', pro4: 'レジ袋(特大)' },
                 { label: 'フライヤー', id: 'FlyModal',pro1: 'アメリカンドッグ', pro2: 'ななチキ', pro3: '揚げ鶏', pro4: 'フランクフルト' },
-                { label: '中華まん', id: 'ChukaModal' },
-                { label: 'コーヒー', id: 'CoffeeModal' },
-                { label: '雑誌', id: 'Modal' },
-                { label: 'おでん', id: 'OdenModal' },
+                { label: '中華まん', id: 'ChukaModal', pro1: 'あんまん', pro2: 'ピザまん', pro3: '肉まん', pro4: 'カレーまん' },
+                { label: 'コーヒー', id: 'CoffeeModal' ,pro1: 'ホットコーヒー', pro2: 'アイスコーヒー', pro3: 'カフェオレ', pro4: 'カフェラテ'},
+                { label: '雑誌', id: 'Modal', pro1: '週刊少年ジャンプ', pro2: '週刊少年マガジン', pro3: '週刊少年サンデー', pro4: '週刊少年チャンピオン' },
+                { label: 'おでん', id: 'OdenModal', pro1: '大根', pro2: '卵', pro3: 'こんにゃく', pro4: 'ちくわ' },
                 { label: 'empty', id: 'Empty' },
                 { label: 'empty', id: 'Empty' }
             ],
@@ -48,6 +48,9 @@ export default {
         },
         closeModal() {
             this.isModalOpen = false;
+        },
+        outsideClick(){
+            
         }
     }
     
