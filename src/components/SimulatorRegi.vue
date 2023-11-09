@@ -58,12 +58,17 @@
                             class="w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">50</button>
                         <button
                             class="w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">50</button>
-
                         <button class="w-32 h-16 m-1 bg-blue-500 text-white rounded hover:bg-blue-600 col-span-2 ">登録/リピート</button>
                     </div>
                 </div>
                 <div class="rounded">
-                    <div class="flex flex-wrap w-80 h-40 py-56 bg-gray-900">
+                    <div class="flex flex-wrap w-80 h-40 py-40 bg-gray-900">
+                        <button
+                            class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">ポイント交換</button>
+                        <button
+                            class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">チャージ</button>
+                        <button
+                            class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">残高照会</button>
                         <button
                             class="w-32 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">7co</button>
                         <button
