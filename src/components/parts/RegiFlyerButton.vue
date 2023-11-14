@@ -13,7 +13,7 @@
             </div>
             <!-- Buttons Section -->
             <div class="flex justify-between mb-8">
-                <button v-if="modalContent.pro1" class="px-4 py-2 bg-white border rounded border-gray-300">{{ modalContent.pro1 }}</button>
+                <button v-if="modalContent.pro1" class="px-4 py-2 bg-white border rounded border-gray-300">{{ modalContent.pro1 }}<br>110円</button>
                 <button v-if="modalContent.pro2" class="px-4 py-2 bg-white border rounded border-gray-300">{{ modalContent.pro2 }}</button>
                 <button v-if="modalContent.pro3" class="px-4 py-2 bg-white border rounded border-gray-300">{{ modalContent.pro3 }}</button>
                 <button v-if="modalContent.pro4" class="px-4 py-2 bg-white border rounded border-gray-300">{{ modalContent.pro4 }}</button>
