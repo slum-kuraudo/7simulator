@@ -108,6 +108,7 @@ import RegiTotal from "./parts/RegiTotal.vue";
 import RegiFlyerButton from "./parts/RegiFlyerButton.vue";
 import RegiContorllet from "./parts/RegiContorllet.vue";
 import NumField from "./parts/NumField.vue";
+
 export default {
     components: {
         TimeDisplay,
@@ -118,5 +119,6 @@ export default {
         RegiContorllet,
         NumField
     }
+   
 }
 </script>
