@@ -2,25 +2,25 @@
     <button @click="getProductData('Bag')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         レジ袋</button>
-        <button @click="getProductData('Flyer')" @click.self="outsideClick"
+    <button @click="getProductData('Flyer')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         フライヤー</button>
-        <button @click="getProductData('Coffee')" @click.self="outsideClick"
+    <button @click="getProductData('Coffee')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         コーヒー</button>
-        <button @click="getProductData('Nikuman')" @click.self="outsideClick"
+    <button @click="getProductData('Nikuman')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         中華まん</button>
-        <button @click="getProductData('Newspaper')" @click.self="outsideClick"
+    <button @click="getProductData('Newspaper')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         新聞</button>
-        <button @click="getProductData('Oden')" @click.self="outsideClick"
+    <button @click="getProductData('Oden')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         おでん</button>
-        <button @click="getProductData('Bag')" @click.self="outsideClick"
+    <button @click="getProductData('Bag')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         レジ袋</button>
-        <button @click="getProductData('Bag')" @click.self="outsideClick"
+    <button @click="getProductData('Bag')" @click.self="outsideClick"
         class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
         レジ袋</button>
     <div v-if="isModalOpen" class=" inset-0 reght-top bg-opacity-50 overflow-y-auto h-full w-full">
@@ -33,31 +33,36 @@
             </div>
             <!-- Buttons Section -->
             <div class="flex justify-between mb-8">
-                <button v-if="modalContent.pro1" @click="count++" class="px-4 py-2 bg-white border rounded border-gray-300">{{
-                    modalContent.pro1 }}<br>{{ modalContent.pro1price }}円<br>{{ count }}</button>
-                <button v-if="modalContent.pro2" @click="count++" class="px-4 py-2 bg-white border rounded border-gray-300">{{
-                    modalContent.pro2 }}<br>{{ modalContent.pro2price }}円<br>{{ count }}</button>
-                <button v-if="modalContent.pro3" @click="count++" class="px-4 py-2 bg-white border rounded border-gray-300">{{
-                    modalContent.pro3 }}<br>{{ modalContent.pro3price }}円<br>{{ count }}</button>
-                <button v-if="modalContent.pro4" @click="count++" class="px-4 py-2 bg-white border rounded border-gray-300">{{
-                    modalContent.pro4 }}<br>{{ modalContent.pro4price }}円<br>{{ count }}</button>
-                <!-- Text Section -->
-                <p class="text-2xl">test</p>
+                <button v-if="modalContent.pro1" 
+                    class="px-4 py-2 bg-white border rounded border-gray-300">{{
+                        modalContent.pro1 }}<br>{{ modalContent.pro1price }}円<br></button>
+                <button v-if="modalContent.pro2" 
+                    class="px-4 py-2 bg-white border rounded border-gray-300">{{
+                        modalContent.pro2 }}<br>{{ modalContent.pro2price }}円<br></button>
+                <button v-if="modalContent.pro3" 
+                    class="px-4 py-2 bg-white border rounded border-gray-300">{{
+                        modalContent.pro3 }}<br>{{ modalContent.pro3price }}円<br></button>
+                <button v-if="modalContent.pro4" 
+                    class="px-4 py-2 bg-white border rounded border-gray-300">{{
+                        modalContent.pro4 }}<br>{{ modalContent.pro4price }}円<br></button>
+
             </div>
+            <!-- Text Section -->
+            <div class="flex justify-between mb-8">なんか書く</div>
         </div>
     </div>
 </template>
 <script>
 import { ref } from 'vue';
 import db from '../../main'
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, } from "firebase/firestore";
 
 export default {
     data() {
         return {
             isModalOpen: false,
             modalContent: {},
-            count:ref(0)
+            count: ref(0)
         }
     },
     methods: {
@@ -74,24 +79,14 @@ export default {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     this.modalContent = docSnap.data();
+                    this.$emit('update-product',docSnap.data())
                 } else {
-                    // doc.data() will be undefined in this case
                     console.log("No such document!");
                     this.currentProduct = null;
                 }
             } catch (error) {
                 console.log("Error getting document:", error);
             }
-            // const productQuery = query(collection(db, "product"),orderBy("id", "asc"));
-            // const querySnapshot = await getDocs(productQuery);
-            // querySnapshot.forEach((doc) => {
-            //     const data = doc.data();
-            //     console.log(Bag.pro1)
-            //     this.names.push(data.name);
-            //     this.prices.push(data.price);
-            //     // console.log(`${doc.id} =>`,  doc.data());
-            // });
-
         }
     }
 
