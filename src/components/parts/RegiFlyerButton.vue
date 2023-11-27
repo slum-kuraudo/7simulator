@@ -33,16 +33,16 @@
             </div>
             <!-- Buttons Section -->
             <div class="flex justify-between mb-8">
-                <button v-if="modalContent.pro1" 
-                    class="px-4 py-2 bg-white border rounded border-gray-300">{{
+                <button v-if="modalContent.pro1" @click="save(modalContent,pro1)"
+                    class=" px-4 py-2 bg-white border rounded border-gray-300">{{
                         modalContent.pro1 }}<br>{{ modalContent.pro1price }}円<br></button>
-                <button v-if="modalContent.pro2" 
+                <button v-if="modalContent.pro2" @click="save(modalContent.pro2)"
                     class="px-4 py-2 bg-white border rounded border-gray-300">{{
                         modalContent.pro2 }}<br>{{ modalContent.pro2price }}円<br></button>
-                <button v-if="modalContent.pro3" 
+                <button v-if="modalContent.pro3" @click="save(modalContent.pro3)"
                     class="px-4 py-2 bg-white border rounded border-gray-300">{{
                         modalContent.pro3 }}<br>{{ modalContent.pro3price }}円<br></button>
-                <button v-if="modalContent.pro4" 
+                <button v-if="modalContent.pro4" @click="save(modalContent.pro4)"
                     class="px-4 py-2 bg-white border rounded border-gray-300">{{
                         modalContent.pro4 }}<br>{{ modalContent.pro4price }}円<br></button>
 
@@ -56,14 +56,16 @@
 import { ref } from 'vue';
 import db from '../../main'
 import { doc, getDoc, } from "firebase/firestore";
-
 export default {
     data() {
         return {
             isModalOpen: false,
-            modalContent: {},
+            modalContent: Object,
             count: ref(0)
         }
+    },
+    props:{
+        product: Object
     },
     methods: {
         closeModal() {
@@ -79,7 +81,6 @@ export default {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     this.modalContent = docSnap.data();
-                    this.$emit('update-product',docSnap.data())
                 } else {
                     console.log("No such document!");
                     this.currentProduct = null;
@@ -87,6 +88,11 @@ export default {
             } catch (error) {
                 console.log("Error getting document:", error);
             }
+        },
+        save(modalContent){
+            let modalContents = JSON.parse(localStorage.getItem('selectedProducts') || '[]');
+            modalContents.push(modalContent);
+            localStorage.setItem('selectedProducts', JSON.stringify(modalContents));
         }
     }
 
