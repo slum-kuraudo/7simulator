@@ -16,12 +16,6 @@
                     <RegiProduct />
                     <NumField />
                 </table>
-                <table class="min-w-full border-collapse ">
-                    <RegiTotal />
-                </table>
-            </div>
-            <div class="flex">
-                <RegiFlyerButton />
             </div>
             <div class="flex item-center">
                 <div class="rounded">
@@ -104,8 +98,6 @@
 import TimeDisplay from "./parts/TimeDisplay.vue"
 import RegiPulldown from "./parts/RegiPulldown.vue"
 import RegiProduct from "./parts/RegiProduct.vue";
-import RegiTotal from "./parts/RegiTotal.vue";
-import RegiFlyerButton from "./parts/RegiFlyerButton.vue";
 import RegiContorllet from "./parts/RegiContorllet.vue";
 import NumField from "./parts/NumField.vue";
 
@@ -114,8 +106,6 @@ export default {
         TimeDisplay,
         RegiPulldown,
         RegiProduct,
-        RegiTotal,
-        RegiFlyerButton,
         RegiContorllet,
         NumField
     }
