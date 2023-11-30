@@ -6,6 +6,21 @@
             {{ button.text }}
         </button>
     </div>
+
+    <div v-if="showModal" class="modal inset-0 reght-top bg-opacity-50 overflow-y-auto h-full w-full"
+        @click.self="outsideClick">
+        <div class="modal-content">
+            <div class="bg-white p-6 rounded shadow-md">
+                <div class="mb-4">
+                    <label class="inline-block text-lg mb-2">数値入力</label>
+                    <p type="text" class="border border-gray-300 rounded w-full py-2 px-4 text-right">
+                        {{ enteredValue }}</p>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 export default {
@@ -31,17 +46,45 @@ export default {
                 { text: '00', action: '00', classes: 'w-16 h-16 bg-blue-500 text-white rounded hover:bg-blue-600' },
                 { text: '万', action: '10000', classes: 'w-16 h-16 bg-white text-black rounded hover:bg-blue-600' },
             ],
+            showModal: false,
+            enteredValue: '',
         };
     },
     methods: {
         handleButtonClick(action) {
             // ここで `action` に応じて何らかのアクションを実行します
-            console.log(action); // 仮の動作としてコンソールに出力
+            if (!isNaN(action)) {
+                this.enteredValue += action;
+                this.showModal = true;
+            } else if (action === 'clear') {
+                this.enteredValue = '';
+                this.showModal = false;
+                console.log(action);
+            }
         },
-    },
+        outsideClick() {
+        },
+        closeModal() {
+            this.showModal = false;
+            this.enteredValue = '';
+        },
+    }
 };
 </script>
 
-<style scoped>
-/* Tailwind CSS の追加スタイルが必要であればここに記述 */
-</style>
+<style>
+.modal {
+
+    pointer-events: none;
+}
+
+.modal-content {
+    position: fixed;
+    top: calc(10% + 40px);
+    /* 元のtopの値に40pxを加算 */
+    right: 100px;
+    /* 右から40pxの位置に配置 */
+    width: 600px;
+    height: 400px;
+    pointer-events: auto;
+}</style>

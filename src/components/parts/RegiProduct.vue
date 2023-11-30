@@ -70,6 +70,7 @@
 <script>
 import db from '../../main'
 import { doc, getDoc, } from "firebase/firestore";
+import AgeButton from './AgeButton.vue';
 export default {
     name: 'RegiProduct',
     data() {
@@ -80,13 +81,16 @@ export default {
             productTypes: ['Bag', 'Flyer', 'Coffee', 'Nikuman', 'Newspaper', 'Oden', 'Bag', 'Bag'],
         }
     },
+    components: {
+        AgeButton
+    },
     props: {
         product: Object
     },
     computed: {
         totalAmount() {
             return this.products.reduce((sum, product) => {
-                return sum + product.price * product.quantity;
+                return sum + product.price * product.quantity * 1.08;
             }, 0).toFixed(0);
         }
     },
@@ -102,6 +106,7 @@ export default {
         },
         async getProductData(productType) {
             this.isModalOpen = true;
+
             try {
                 const docRef = doc(db, "product", productType);
                 const docSnap = await getDoc(docRef);

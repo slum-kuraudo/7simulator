@@ -26,34 +26,7 @@
                 </div>
                 <div class="rounded">
                     <div class="flex flex-wrap w-48 h-90 p-4 bg-gray-500">
-                        <button id="7co" class="w-16 h-16 p-4 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">7co</button>
-                        <button
-                            id="pay" class="w-16 h-16 p-2 m-1 bg-green-500 text-white rounded hover:bg-blue-600 text-xs whitespace-nowrap col-span-2">電子マネー</button>
-                        <button
-                        id="m9" class="w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">9</button>
-                        <button
-                        id="f9"  class="w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">9</button>
-
-                        <button
-                        id="m19" class="w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">19</button>
-                        <button
-                        id="f19" class="w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">19</button>
-
-                        <button
-                        id="m29" class="w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">29</button>
-                        <button
-                        id="f29" class="w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">29</button>
-
-                        <button
-                        id="m49" class="w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">49</button>
-                        <button
-                        id="f49"  class="w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">49</button>
-
-                        <button
-                        id="m50" class="w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">50</button>
-                        <button
-                        id="f50" class="w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2">50</button>
-                        <button id="enter" class="w-32 h-16 m-1 bg-blue-500 text-white rounded hover:bg-blue-600 col-span-2 ">登録/リピート</button>
+                        <AgeButton />
                     </div>
                 </div>
                 <div class="rounded">
@@ -100,6 +73,7 @@ import RegiPulldown from "./parts/RegiPulldown.vue"
 import RegiProduct from "./parts/RegiProduct.vue";
 import RegiContorllet from "./parts/RegiContorllet.vue";
 import NumField from "./parts/NumField.vue";
+import AgeButton from "./parts/AgeButton.vue";
 
 export default {
     components: {
@@ -107,7 +81,8 @@ export default {
         RegiPulldown,
         RegiProduct,
         RegiContorllet,
-        NumField
+        NumField,
+        AgeButton
     }
    
 }
