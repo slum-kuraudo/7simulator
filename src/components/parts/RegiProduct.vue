@@ -37,16 +37,15 @@
         <button v-for="productType in productTypes" :key="productType" @click="getProductData(productType)"
             class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
             {{ productType }}</button>
-        <div v-if="isModalOpen" class=" inset-0 reght-top bg-opacity-50 overflow-y-auto h-full w-full">
-            <div
-                class="modal-content absolute top-0 mx-auto p-5 border w-11/12 md:w-1/2 lg:w-1/3 shadow-lg rounded-md bg-orange-400">
+        <div v-if="isModalOpen" class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
+            <div class="modal-content custom-height h-24 mx-auto p-4  border w-11/12 md:w-1/2 lg:w-1/3 shadow-lg rounded-md bg-orange-400">
                 <!-- Header Section -->
                 <div class="flex justify-between items-center mb-4">
                     <h1 v-if="modalContent" class="text-4xl font-bold">{{ modalContent.label }}</h1>
                     <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">入力中止</button>
                 </div>
                 <!-- Buttons Section -->
-                <div class="flex justify-between mb-8">
+                <div  class="flex justify-between mb-8">
                     <button v-if="modalContent.pro1" @click="save(modalContent, 'pro1')"
                         class=" px-4 py-2 bg-white border rounded border-gray-300">{{
                             modalContent.pro1 }}<br>{{ modalContent.pro1price }}円<br></button>
@@ -64,13 +63,12 @@
                 <div class="flex justify-between mb-8">なんか書く</div>
             </div>
         </div>
-
     </div>
 </template>
 <script>
 import db from '../../main'
 import { doc, getDoc, } from "firebase/firestore";
-import AgeButton from './AgeButton.vue';
+// import AgeButton from './AgeButton.vue';
 export default {
     name: 'RegiProduct',
     data() {
@@ -81,9 +79,9 @@ export default {
             productTypes: ['Bag', 'Flyer', 'Coffee', 'Nikuman', 'Newspaper', 'Oden', 'Bag', 'Bag'],
         }
     },
-    components: {
-        AgeButton
-    },
+    // components: {
+    //     AgeButton
+    // },
     props: {
         product: Object
     },
@@ -141,6 +139,7 @@ export default {
                     quantity: 1 // 初期数量は1
                 });
             }
+            console.log(this.products)
         },
         calculateTaxIncludedPrice(product) {
             if (!product.price || !product.quantity) return '';
@@ -153,15 +152,7 @@ export default {
 </script>
 
 <style>
-.modal-content {
-    /* その他のスタイルを適用 */
-    /* 位置を直接指定する */
-    position: fixed;
-    top: calc(1% + 20px);
-    /* 元のtopの値に40pxを加算 */
-    right: 100px;
-    /* 右から40pxの位置に配置 */
-    width: 600px;
-    height: 400px;
+.custom-height {
+  height: 200px; /* 例: 150ピクセルの高さ */
 }
 </style>

@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import {createStore}from 'vuex'
 import '@/assets/tailwind.css'
 import router from './vue-router/index.js'
 import SimulatorTop from './Toppage.vue'
@@ -7,8 +6,6 @@ import SimulatorTop from './Toppage.vue'
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
-
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

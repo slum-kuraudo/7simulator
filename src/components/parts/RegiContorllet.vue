@@ -7,6 +7,8 @@
         </button>
     </div>
 
+
+
     <div v-if="showModal" class="modal inset-0 reght-top bg-opacity-50 overflow-y-auto h-full w-full"
         @click.self="outsideClick">
         <div class="modal-content">
@@ -15,6 +17,7 @@
                     <label class="inline-block text-lg mb-2">数値入力</label>
                     <p type="text" class="border border-gray-300 rounded w-full py-2 px-4 text-right">
                         {{ enteredValue }}</p>
+                    <p>Cボタンでクリア&閉じる</p>
                 </div>
                 <div class="grid grid-cols-3 gap-2">
                 </div>
@@ -52,7 +55,6 @@ export default {
     },
     methods: {
         handleButtonClick(action) {
-            // ここで `action` に応じて何らかのアクションを実行します
             if (!isNaN(action)) {
                 this.enteredValue += action;
                 this.showModal = true;
@@ -60,6 +62,8 @@ export default {
                 this.enteredValue = '';
                 this.showModal = false;
                 console.log(action);
+            } else if (action === 'recipt') {
+                alert('店舗名が書かれた短いレシートが出力されます。\nこのボタンは滅多に使わないので、今回は実装しません。')
             }
         },
         outsideClick() {
@@ -87,4 +91,5 @@ export default {
     width: 600px;
     height: 400px;
     pointer-events: auto;
-}</style>
+}
+</style>

@@ -14,7 +14,6 @@
             <div class="">
                 <table class="min-w-full border-collapse">
                     <RegiProduct />
-                    <NumField />
                 </table>
             </div>
             <div class="flex item-center">
@@ -72,7 +71,6 @@ import TimeDisplay from "./parts/TimeDisplay.vue"
 import RegiPulldown from "./parts/RegiPulldown.vue"
 import RegiProduct from "./parts/RegiProduct.vue";
 import RegiContorllet from "./parts/RegiContorllet.vue";
-import NumField from "./parts/NumField.vue";
 import AgeButton from "./parts/AgeButton.vue";
 
 export default {
@@ -81,7 +79,6 @@ export default {
         RegiPulldown,
         RegiProduct,
         RegiContorllet,
-        NumField,
         AgeButton
     }
    

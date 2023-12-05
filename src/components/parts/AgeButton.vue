@@ -8,6 +8,7 @@
 </template>
 
 <script>
+// import RegiProduct from './RegiProduct.vue';
 import{doc,setDoc,serverTimestamp} from "firebase/firestore";
 import db from '../../main'
 export default {
@@ -27,8 +28,9 @@ export default {
                 { id: 'm50', text: '50', action: '男50', classes: 'w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2'},
                 { id: 'f50', text: '50', action: '女50', classes: 'w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2' },
                 { id: 'enter', text: '登録/リピート', action: 'doSomething', classes: 'w-32 h-16 m-1 bg-blue-500 text-white rounded hover:bg-blue-600 col-span-2' }
-            ]
-        };
+            ],
+            
+        }
     },
     props:{
         buttonText:String,
