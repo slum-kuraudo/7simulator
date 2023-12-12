@@ -1,28 +1,49 @@
-import { createStore }from 'vuex';
+import { createStore } from 'vuex';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import db from './main'
 
-
-const store = createStore({
-state:{
-    products:[],
-    enteredValue:''
-},
-mutations:{
-    ADD_PRODUCT(state,product){
-        state.products.push(product)
+export const store = createStore({
+    state: {
+        products: [],
+        enteredValue: '',
+        setAgeButtonValue: '',
+        date: '',
+        showModal: false
     },
-    SET_UPDATE_VALUE(state,value){
-        state.enteredValue = value;
-    
-    }
-},
-actions:{
-    addProduct({commit},product){
-        commit('ADD_PRODUCT',product);
+    mutations: {
+        setShowModal(state, value) {
+            state.showModal = value;
+        },
+        setEnteredValue(state, value) {
+            state.enteredValue = value;
+        },
+        setAgeButtonValue(state, value) {
+            state.setAgeButtonValue = value;
+        },
+        setProducts(state, products) {
+            state.products = products;
+        },
+        totalAmount(state,value) {
+            state.totalAmount = value;
+        }
     },
-    setEnterrdValue({commit},value){
-        commit('SET_UPDATE_VALUE',value);
+    actions: {
+        async saveValueFirestore({ state }) {
+            const docData = {
+                product: state.products,
+                deposit: state.enteredValue,
+                total: state.totalAmount,
+                age: state.setAgeButtonValue,
+                change: state.enteredValue - state.totalAmount,
+                date: serverTimestamp()
+            }
+            try {
+                await addDoc(collection(db, "detail"), docData, );
+            } catch (e) {
+                console.log(e);
+            }
+        }
     }
-}
 
 });
 

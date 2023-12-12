@@ -49,7 +49,6 @@ export default {
                 { text: '00', action: '00', classes: 'w-16 h-16 bg-blue-500 text-white rounded hover:bg-blue-600' },
                 { text: '万', action: '10000', classes: 'w-16 h-16 bg-white text-black rounded hover:bg-blue-600' },
             ],
-            showModal: false,
             enteredValue: '',
         };
     },
@@ -57,10 +56,11 @@ export default {
         handleButtonClick(action) {
             if (!isNaN(action)) {
                 this.enteredValue += action;
-                this.showModal = true;
+                this.$store.commit('setShowModal',true)
+                this.$store.commit('setEnteredValue', this.enteredValue);
             } else if (action === 'clear') {
                 this.enteredValue = '';
-                this.showModal = false;
+                this.$store.commit('setShowModal',false)
                 console.log(action);
             } else if (action === 'recipt') {
                 alert('店舗名が書かれた短いレシートが出力されます。\nこのボタンは滅多に使わないので、今回は実装しません。')
@@ -69,8 +69,13 @@ export default {
         outsideClick() {
         },
         closeModal() {
-            this.showModal = false;
+            this.$store.commit('setShowModal', false);
             this.enteredValue = '';
+        },
+    },
+    computed: {
+        showModal() {
+            return this.$store.state.showModal;
         },
     }
 };
