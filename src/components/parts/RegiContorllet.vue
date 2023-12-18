@@ -6,6 +6,15 @@
             {{ button.text }}
         </button>
     </div>
+    <div v-if="cancelModal" class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
+            <div class="flex justify-between items-center mb-4">
+                <h1 class="text-4xl font-bold">取消</h1>
+                <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">確定</button>
+                
+            </div>
+        </div>
+    </div>
 
 
 
@@ -50,25 +59,33 @@ export default {
                 { text: '万', action: '10000', classes: 'w-16 h-16 bg-white text-black rounded hover:bg-blue-600' },
             ],
             enteredValue: '',
+            cancelModal: false,
         };
     },
     methods: {
         handleButtonClick(action) {
             if (!isNaN(action)) {
                 this.enteredValue += action;
-                this.$store.commit('setShowModal',true)
+                this.$store.commit('setShowModal', true)
                 this.$store.commit('setEnteredValue', this.enteredValue);
             } else if (action === 'clear') {
                 this.enteredValue = '';
-                this.$store.commit('setShowModal',false)
+                location.reload();
+                this.$store.commit('setShowModal', false)
                 console.log(action);
             } else if (action === 'recipt') {
                 alert('店舗名が書かれた短いレシートが出力されます。\nこのボタンは滅多に使わないので、今回は実装しません。')
             }
+        if(action == 'back'){
+            this.cancelModal = true;
+
+        }
+
         },
         outsideClick() {
         },
         closeModal() {
+            this.cancelModal = false;
             this.$store.commit('setShowModal', false);
             this.enteredValue = '';
         },
@@ -77,8 +94,14 @@ export default {
         showModal() {
             return this.$store.state.showModal;
         },
+        buttonflag() {
+            return this.$store.state.buttonFlag;
+        },
+        products() {
+            return this.$store.state.products;
+        },
+        }
     }
-};
 </script>
 
 <style>

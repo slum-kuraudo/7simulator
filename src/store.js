@@ -2,12 +2,14 @@ import { createStore } from 'vuex';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import db from './main'
 
+
 export const store = createStore({
     state: {
         products: [],
         enteredValue: '',
         setAgeButtonValue: '',
         date: '',
+        buttonFlag: false,
         showModal: false
     },
     mutations: {
@@ -25,6 +27,9 @@ export const store = createStore({
         },
         totalAmount(state,value) {
             state.totalAmount = value;
+        },
+        setbuttonFlag(state, flag) {
+            state.buttonFlag = flag;
         }
     },
     actions: {
@@ -38,7 +43,7 @@ export const store = createStore({
                 date: serverTimestamp()
             }
             try {
-                await addDoc(collection(db, "detail"), docData, );
+                await addDoc(collection(db, "detail"), docData,);
             } catch (e) {
                 console.log(e);
             }

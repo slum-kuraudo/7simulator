@@ -29,13 +29,14 @@ export default {
                 { id: 'f50', text: '50', action: '女50', classes: 'w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2' },
                 { id: 'enter', text: '登録/リピート', action: 'doSomething', classes: 'w-32 h-16 m-1 bg-blue-500 text-white rounded hover:bg-blue-600 col-span-2' }
             ],
-
+            regiflag: false,
         }
     },
     props: {
         buttonText: String,
         action: String,
         totalAmount: Number,
+        
     },
     methods: {
         async registerOrder() {
@@ -49,14 +50,22 @@ export default {
             } catch (e) {
                 console.error(e);
             }
+        
 
         },
         handleButtonClick(action) {
+            if(this.regiflag == true){
+                alert('実際の業務ではドロワーにお金をしまい\nCボタンを押して画面を初期化してください')
+                
+            }else{
             this.$store.commit('setShowModal', false);
             this.$store.commit('setAgeButtonValue', action);
-            this.$store.commit
+            this.$store.commit('setbuttonFlag', true);
             console.log(action);
             this.$store.dispatch('saveValueFirestore');
+            this.regiflag= true;
+        }
+
         },
         computed: {
             enteredValue() {

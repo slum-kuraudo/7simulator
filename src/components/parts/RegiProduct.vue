@@ -22,7 +22,7 @@
     <table class="min-w-full border-collapse ">
         <tr>
             <td class="border-white border px-4 py-2  text-green-600 font-bold text-white text-right ">お預かり</td>
-            <td class="border-white border px-4 py-2 w-64 text-right">{{ Oazukari }}</td>
+            <td v-if="buttonflag" class="border-white border px-4 py-2 w-64 text-right">{{ Oazukari }}</td>
         </tr>
         <tr>
             <td class="border-white border px-4 py-2 text-green-600 font-bold text-white text-right ">合計</td>
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td class="border-white border px-4 py-2 text-green-600 font-bold stext-white text-right ">お釣り</td>
-            <td class="border-white border px-4 py-2 text-right">{{ Oazukari-totalAmount }}</td>
+            <td v-if="buttonflag" class="border-white border px-4 py-2 text-right">{{Oazukari-totalAmount }}</td>
         </tr>
     </table>
     <div class="flex">
@@ -38,11 +38,11 @@
             class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
             {{ productType }}</button>
         <div v-if="isModalOpen" class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
-            <div class="modal-content custom-height h-16 mx-auto p-4  border shadow-lg rounded-md bg-orange-400">
+            <div class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
                 <!-- Header Section -->
                 <div class="flex justify-between items-center mb-4">
                     <h1 v-if="modalContent" class="text-4xl font-bold">{{ modalContent.label }}</h1>
-                    <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">入力中止</button>
+                    <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">確定</button>
                 </div>
                 <!-- Buttons Section -->
                 <div class="flex justify-between mb-8">
@@ -74,7 +74,9 @@ export default {
     data() {
         return {
             products: [],
+            regiflag: false,
             isModalOpen: false,
+            buttonFlag: false,
             modalContent: Object,
             productTypes: ['Bag', 'Flyer', 'Coffee', 'Nikuman', 'Newspaper', 'Oden', 'Bag', 'Bag'],
         }
@@ -93,6 +95,9 @@ export default {
         },
         Oazukari() {
             return this.$store.state.enteredValue
+        },
+        buttonflag(){
+            return this.$store.state.buttonFlag
         }
 
 
@@ -152,6 +157,8 @@ export default {
             if (!product.price || !product.quantity) return '';
             return (product.price * product.quantity * 1.08).toFixed(0);
         }
+        
+        
     }
 
 }
@@ -159,9 +166,8 @@ export default {
 </script>
 
 <style>
-.custom-height {
-    height: 100px;
-    /* 例: 150ピクセルの高さ */
-    width: 24px;
+.custom-modal-height {
+    height: 200px !important;
 }
+
 </style>
