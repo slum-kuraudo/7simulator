@@ -42,7 +42,7 @@
                 <!-- Header Section -->
                 <div class="flex justify-between items-center mb-4">
                     <h1 v-if="modalContent" class="text-4xl font-bold">{{ modalContent.label }}</h1>
-                    <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">確定</button>
+                    
                 </div>
                 <!-- Buttons Section -->
                 <div class="flex justify-between mb-8">

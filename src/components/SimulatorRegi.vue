@@ -30,8 +30,12 @@
                 </div>
                 <div class="rounded">
                     <div class="flex flex-wrap w-80 h-40 py-40 bg-gray-900">
-                        <button
-                            class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">ポイント交換</button>
+                        <button class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">ポイント交換
+                            <div class="tooltip">
+                                <div class="tooltip_message">nanacoのポイントを交換できるようになります
+                                </div>
+                            </div>
+                        </button>
                         <button
                             class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">チャージ</button>
                         <button
@@ -56,6 +60,11 @@
                             class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">キャンセル</button>
                         <button
                             class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">情報</button>
+                        <div v-if="isModalOpen" class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
+                            <div
+                                class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
+                            </div>
+                        </div>
                         <button
                             class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">呼出</button>
                     </div>
@@ -67,6 +76,7 @@
     </div>
 </template>
 <script>
+import { doc, getDoc, } from "firebase/firestore";
 import TimeDisplay from "./parts/TimeDisplay.vue"
 import RegiPulldown from "./parts/RegiPulldown.vue"
 import RegiProduct from "./parts/RegiProduct.vue";
@@ -81,6 +91,6 @@ export default {
         RegiContorllet,
         AgeButton
     }
-   
+
 }
 </script>

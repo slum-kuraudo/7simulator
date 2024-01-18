@@ -78,9 +78,8 @@ export default {
             }
         if(action == 'back'){
             this.cancelModal = true;
-
         }
-
+        
         },
         outsideClick() {
         },
