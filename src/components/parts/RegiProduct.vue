@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td class="border-white border px-4 py-2 text-green-600 font-bold stext-white text-right ">お釣り</td>
-            <td v-if="buttonflag" class="border-white border px-4 py-2 text-right">{{Oazukari-totalAmount }}</td>
+            <td v-if="buttonflag" class="border-white border px-4 py-2 text-right">{{ Oazukari - totalAmount }}</td>
         </tr>
     </table>
     <div class="flex">
@@ -42,7 +42,10 @@
                 <!-- Header Section -->
                 <div class="flex justify-between items-center mb-4">
                     <h1 v-if="modalContent" class="text-4xl font-bold">{{ modalContent.label }}</h1>
-                    
+                    <button v-if="isModalOpen" @click="closeModal"
+                        class="sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
+                        確定</button>
+
                 </div>
                 <!-- Buttons Section -->
                 <div class="flex justify-between mb-8">
@@ -68,11 +71,13 @@
 <script>
 import db from '../../main'
 import { doc, getDoc, } from "firebase/firestore";
+import { axios } from 'axios'
 // import AgeButton from './AgeButton.vue';
 export default {
     name: 'RegiProduct',
     data() {
         return {
+            barcode: '',
             products: [],
             regiflag: false,
             isModalOpen: false,
@@ -96,11 +101,9 @@ export default {
         Oazukari() {
             return this.$store.state.enteredValue
         },
-        buttonflag(){
+        buttonflag() {
             return this.$store.state.buttonFlag
         }
-
-
     },
     methods: {
         closeModal() {
@@ -110,11 +113,23 @@ export default {
         outsideClick() {
         },
         getProduct(index) {
-            return this.products[index - 1] || {}
+            // products 配列が定義されていて、要求されたインデックスが配列の長さ内にあるか確認
+            if (this.products && index - 1 < this.products.length) {
+                return this.products[index - 1];
+            }
+            // 該当する要素がない場合は空のオブジェクトを返す
+            return {};
+        },
+        handleBarcodeInput(event) {
+            if (event.key !== 'Enter') {
+                this.barcode += event.key;
+                return;
+            }
+            this.fetchProductdata(this.barcode);
+            this.barcode = '';
         },
         async getProductData(productType) {
             this.isModalOpen = true;
-
             try {
                 const docRef = doc(db, "product", productType);
                 const docSnap = await getDoc(docRef);
@@ -126,6 +141,17 @@ export default {
                 }
             } catch (error) {
                 console.log("Error getting document:", error);
+            }
+        },
+        async fetchProductdata(jancode) {
+            const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${jancode}`
+            try {
+                const response = await axios.get(url)
+                const items = response.data.hits;
+                console.log(items)
+            } catch (error) {
+                console.error('APIエラー', error);
+                this.products = null;
             }
         },
         save(modalContent, productName) {
@@ -157,8 +183,8 @@ export default {
             if (!product.price || !product.quantity) return '';
             return (product.price * product.quantity * 1.08).toFixed(0);
         }
-        
-        
+
+
     }
 
 }
@@ -169,5 +195,4 @@ export default {
 .custom-modal-height {
     height: 200px !important;
 }
-
 </style>
