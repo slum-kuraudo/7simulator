@@ -15,9 +15,9 @@ export default {
     data() {
         return {
             buttons: [
-                { id: '7co', text: '7co', action: 'doSomething', classes: 'w-16 h-16 p-4 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2' },
+                { id: '7co', text: '7co', action: 'doSomething', classes: 'w-16 h-16 p-4 m-1 bg-green-500 text-white rounded  hover:bg-blue-600 col-span-2' },
                 { id: 'pay', text: '電子マネー', action: 'doSomething', classes: 'w-16 h-16 p-2 m-1 bg-green-500 text-white rounded hover:bg-blue-600 text-xs whitespace-nowrap col-span-2' },
-                { id: 'm9', text: '9', action: '男9', classes: 'w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2' },
+                { id: 'm9', text: '9', action: '男9', classes: 'w-16 h-16 p-4 m-1  bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2' },
                 { id: 'f9', text: '9', action: '女9', classes: 'w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2' },
                 { id: 'm19', text: '19', action: '男19', classes: 'w-16 h-16 p-4 m-1 bg-white text-blue-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2' },
                 { id: 'f19', text: '19', action: '女19', classes: 'w-16 h-16 p-4 m-1 bg-white text-red-700 rounded hover:bg-blue-600 font-bold text-3xl col-span-2' },

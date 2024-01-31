@@ -2,11 +2,11 @@
     <table class="min-w-full border-collapse">
         <thead>
             <tr>
-                <th class="border px-4 py-2">行</th>
-                <th class="border px-4 py-2">製品名</th>
-                <th class="border px-4 py-2">価格</th>
-                <th class="border px-4 py-2">個数</th>
-                <th class="border px-4 py-2">税込み価格</th>
+                <th class="border-black px-4 py-2">行</th>
+                <th class="border-black px-4 py-2">製品名</th>
+                <th class="border-black px-4 py-2">価格</th>
+                <th class="border-black px-4 py-2">個数</th>
+                <th class="border-black px-4 py-2">税込み価格</th>
             </tr>
         </thead>
         <tbody>
@@ -21,16 +21,16 @@
     </table>
     <table class="min-w-full border-collapse ">
         <tr>
-            <td class="border-white border px-4 py-2  text-green-600 font-bold text-white text-right ">お預かり</td>
-            <td v-if="buttonflag" class="border-white border px-4 py-2 w-64 text-right">{{ Oazukari }}</td>
+            <td class="border-black border px-4 py-2  text-black-600 font-bold  text-right ">お預かり</td>
+            <td v-if="buttonflag" class="border-black border px-4 py-2 w-64 text-right">{{ Oazukari }}</td>
         </tr>
         <tr>
-            <td class="border-white border px-4 py-2 text-green-600 font-bold text-white text-right ">合計</td>
-            <td class="border-white border px-4 py-2 text-right">{{ totalAmount }}</td>
+            <td class="border-black border px-4 py-2 text-black-600 font-bold  text-right ">合計</td>
+            <td class="border-black border px-4 py-2 text-right">{{ totalAmount }}</td>
         </tr>
         <tr>
-            <td class="border-white border px-4 py-2 text-green-600 font-bold stext-white text-right ">お釣り</td>
-            <td v-if="buttonflag" class="border-white border px-4 py-2 text-right">{{ Oazukari - totalAmount }}</td>
+            <td class="border-black border px-4 py-2 text-black-600 font-bold text-right ">お釣り</td>
+            <td v-if="buttonflag" class="border-black border px-4 py-2 text-right">{{ Oazukari - totalAmount }}</td>
         </tr>
     </table>
     <div class="flex">
