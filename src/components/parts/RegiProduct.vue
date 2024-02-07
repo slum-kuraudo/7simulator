@@ -64,9 +64,11 @@
                 </div>
                 <!-- Text Section -->
                 <div class="flex justify-between mb-8">なんか書く</div>
+                
             </div>
         </div>
     </div>
+    <input type="text" autofocus v-model="janCode"  @keyup.enter="fetchProductData" ref="janCodeInput" style="display:none;">
 </template>
 <script>
 import db from '../../main'
@@ -77,7 +79,7 @@ export default {
     name: 'RegiProduct',
     data() {
         return {
-            barcode: '',
+            janCode: "",
             products: [],
             regiflag: false,
             isModalOpen: false,
@@ -110,6 +112,10 @@ export default {
             this.isModalOpen = false;
             this.modalContent = {};
         },
+        addosakeproduct(product){
+            this.products.push(product)
+            this.$store.commit('setProducts', this.products)
+        },
         outsideClick() {
         },
         getProduct(index) {
@@ -119,14 +125,6 @@ export default {
             }
             // 該当する要素がない場合は空のオブジェクトを返す
             return {};
-        },
-        handleBarcodeInput(event) {
-            if (event.key !== 'Enter') {
-                this.barcode += event.key;
-                return;
-            }
-            this.fetchProductdata(this.barcode);
-            this.barcode = '';
         },
         async getProductData(productType) {
             this.isModalOpen = true;
@@ -143,16 +141,34 @@ export default {
                 console.log("Error getting document:", error);
             }
         },
-        async fetchProductdata(jancode) {
-            const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${jancode}`
-            try {
-                const response = await axios.get(url)
+        async fetchProductData() {
+            const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${this.janCode}`         
+            try{
+                const response = await axios.get(url);
                 const items = response.data.hits;
                 console.log(items)
-            } catch (error) {
-                console.error('APIエラー', error);
-                this.products = null;
+                // if (items.length > 0) {
+                //     const item = items[0];
+                //     const name = item.name;
+                //     const price = item.price;
+                //     const existingProduct = this.products.find(product => product.name === name);
+                //     if (existingProduct) {
+                //         existingProduct.quantity++;
+                //     } else if (name && price) {
+                //         this.products.push({
+                //             name: name,
+                //             price: price,
+                //             quantity: 1
+                //         });
+                //     }
+                //     this.$store.commit('setProducts', this.products)
+                //     this.$store.commit('totalAmount', this.totalAmount);
+                // }
+            }catch{
+                console.log('error')
             }
+            
+
         },
         save(modalContent, productName) {
             // 製品の数が5個に達したかチェック
@@ -185,6 +201,9 @@ export default {
         }
 
 
+    },
+    mounted() {
+        this.$refs.janCodeInput.focus();
     }
 
 }

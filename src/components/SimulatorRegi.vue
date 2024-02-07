@@ -1,17 +1,89 @@
 <template>
     <div class="grid grid-cols-2 h-screen">
         <div class="bg-gray-100">
-            <p v-if="currentStage === '0'">各ボタンの機能を見てみよう</p>
-            <div v-if="currentStage === '1'">
-            <div class="bg-green-500 rounded-lg p-4">
-                <!-- Your tutorial content goes here -->
-                <h2 class="text-white text-6xl font-bold text-center">一連の流れをやってみよう</h2>
-                <p class="text-white text-2xl">では、実際にやってみましょう。商品を読み込んでみましょう。<br>
-                    すると値段が表示されます。お客様からお金を預かったら金額を入力してみましょう。<br>
-                </p>
+            <div v-if="currentStage === '0'">
+                <div class="bg-green-500 rounded-lg p-4">
+                    <div class="text-white text-6xl font-bold text-center">
+                        各ボタンの機能を見てみよう<br>
+                        各ボタンをクリックしてみてください
+                        <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
+                        <p class="text-white text-2xl">
+                        </p>
+                    </div>
+                </div>
             </div>
+            <div v-if="currentStage === '1'">
+                <div class="bg-green-500 rounded-lg p-4">
+                    <!-- Your tutorial content goes here -->
+                    <h2 class="text-white text-6xl font-bold text-center">一連の流れをやってみよう</h2>
+                    <p class="text-white text-2xl">では、実際にやってみましょう。商品を読み込んでみましょう。<br>
+                        <br>
+                        すると値段が表示されます。お客様からお金を預かったら金額を入力してみましょう。<br>
+                        TODO:ここで画像をだす
+                        <br>
+                        お客様の性別と年齢を大体でいいので推定してそれに合ったボタンを押すと会計完了です。<br>
+                        <br>
+                    </p>
+                    <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
+                </div>
+            </div>
+            <div v-if="currentStage === '2'">
+                <div class="bg-green-500 rounded-lg p-4">
+                    <h2 class="text-white text-6xl font-bold text-center">
+                        お酒とたばこの販売をしてみましょう<br>
+                        <p class="text-white text-2xl">
+                            お酒とタバコを販売する時は年齢確認が必要です。
+                            <br>
+                            ボタンを押してお酒を商品登録してみましょう。
+                            <br>
+                        </p>
+                        <div>
+                            <button @click="osake"
+                                class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
+                            お酒
+                            </button>
+                                <div 
+                                    class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
+                                </div>
+                                <div v-if="osakeModal"
+                                    class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
+                                    <div v-if="osake" class="text-white text-xl">
+                                        年齢確認のご協力をお願いします。実際の業務ではお客様の画面に「はい」ボタンが表示されているので<br>
+                                        お客様に押させてから店員側でも年齢を推定してはいを押してください。
+                                        <div class="text-2xl">{{ twentyYearsAgo }}</div>
+                                    <button @click="closeOsakeModal"
+                                        class="sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
+                                        はい</button>
+                                    </div>
+                                </div>
+                            </div>
+                                <p class="text-white text-2xl">
+                            すると年齢確認に関するポップアップがお客様と店員側に表示されるので最初にお客様には画面を読んでもらって必ずお客様自身で「はい」ボタンを押させるようにしましょう
+                            <br>
+                            このボタンを押させる事は警察庁からの指導なので必ずお客様側で押させてください
+                            <br>
+                            未成年だと思われる方には年齢確認を行いましょう。「はい」ボタンを押すと今日から20年前の日付が表示されるので参考にして年齢確認を行いましょう。
+                            <br>
+                            未成年だった場合販売してはいけません。また、身分証の提示を拒否する方にも販売してはいけません。もし販売すると店員側に罰則が行く可能性があります。
+                                </p>
+                    </h2>
+                    <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
+                </div>
+            </div>
+            <div v-if="currentStage === 3 ">
+                <div class="bg-green-500 rounded-lg p-4">
+                    <h2 class="text-white text-6xl">フライヤーや中華まん、雑誌の販売をしてみよう<br></h2>
+                    <p class="text-white text-2xl">
+                        レジ袋やフライヤー商品、中華まんなどは会計金額の下の8つ並んでいるボタンから選択できます。<br>
+                        お客様にレジ袋がいるか聞き、注文されたら選択しましょう。<br>
+                        それぞれのボタンを押すと商品が登録されます。
+                    </p>
+                    <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
             </div>
         </div>
+        </div>
+
+
         <div class="bg-grays-100 ">
             <div class="flex items-center ml-7">
                 <div class="flex flex-col mr-2">
@@ -118,6 +190,7 @@ import RegiPulldown from "./parts/RegiPulldown.vue"
 import RegiProduct from "./parts/RegiProduct.vue";
 import RegiContorllet from "./parts/RegiContorllet.vue";
 import AgeButton from "./parts/AgeButton.vue";
+import moment from 'moment';
 
 export default {
     data() {
@@ -125,7 +198,8 @@ export default {
             details: [],
             selectedDetail: null,
             showModal: false,
-
+            osakeModal: false,
+            twentyYearsAgo: moment().subtract(20, 'years').format('YYYY-MM-DD')
         }
     },
     components: {
@@ -140,7 +214,16 @@ export default {
             this.showModal = false
             this.selectedDetail = null
         },
+        osake(){
+            this.osakeModal = true
+        },
+        closeOsakeModal(){
+            this.$emit('modalclosed')
+            this.osakeModal = false
+            this.$refs.regiProduct.addosakeproduct({name:'Haineken',price:200,quantity:1})
+        },
         async fetchData() {
+            this.osakeModal = false
             this.showModal = true
             const query = await getDocs(collection(db, "detail"));
             this.details = query.docs.map((doc) => ({
@@ -190,5 +273,4 @@ export default {
     /* スクロールエリアの高さ */
     overflow-y: auto;
     /* 縦方向にスクロール可能に設定 */
-}
-</style>
+}</style>
