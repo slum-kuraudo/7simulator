@@ -67,7 +67,7 @@
         </div>
     </div>
     <div>バーコードリーダーを使用する際は下のフィールドをクリックしてください</div>
-    <input type="text" inputmode="url" style="border-color: black;" autofocus v-model="janCode" @keyup.enter="fetchProductData" ref="janCodeInput">
+    <input type="text" inputmode="url" style="border-color: black;" autofocus v-model="janCode" @keyup.enter="fetchProductData" ref="janCodeInput">←フィールド
 </template>
 <script>
 import db from '../../main'

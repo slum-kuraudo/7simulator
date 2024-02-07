@@ -70,7 +70,7 @@
                     <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
                 </div>
             </div>
-            <div v-if="currentStage === 3 ">
+            <div v-if="currentStage === '3' ">
                 <div class="bg-green-500 rounded-lg p-4">
                     <h2 class="text-white text-6xl">フライヤーや中華まん、雑誌の販売をしてみよう<br></h2>
                     <p class="text-white text-2xl">

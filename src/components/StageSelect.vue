@@ -9,8 +9,8 @@
                 <button @click="Simulation(1)" class="bg-orange-500 text-white rounded-lg py-2 px-3">1: 一連の流れをやってみよう</button>
                 <button @click="Simulation(2)" class="bg-orange-500 text-white rounded-lg py-2 px-3">2: お酒のたばこの販売をしてみよう</button>
                 <button @click="Simulation(3)" class="bg-orange-500 text-white rounded-lg py-2 px-3">3: フライヤーや中華まん、雑誌の販売をしてみよう</button>
-                <button @click="Simulation(4)" class="bg-orange-500 text-white rounded-lg py-2 px-3">4: 返品作業をしてみよう</button>
-                <button @click="Simulation(5)" class="bg-orange-500 text-white rounded-lg py-2 px-3">5: 公共料金の支払いやチケットの発券をしてみよう</button>
+                <button @click="Simulation(4)" class="bg-orange-500 text-white rounded-lg py-2 px-3">4: (準備中)返品作業をしてみよう</button>
+                <button @click="Simulation(5)" class="bg-orange-500 text-white rounded-lg py-2 px-3">5: (準備中)公共料金の支払いやチケットの発券をしてみよう</button>
             </div>
         </div>
 
