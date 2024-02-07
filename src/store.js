@@ -10,7 +10,8 @@ export const store = createStore({
         setAgeButtonValue: '',
         date: '',
         buttonFlag: false,
-        showModal: false
+        showModal: false,
+        osakeModal: false,
     },
     mutations: {
         setShowModal(state, value) {
@@ -30,6 +31,9 @@ export const store = createStore({
         },
         setbuttonFlag(state, flag) {
             state.buttonFlag = flag;
+        },
+        setOsakeModal(state, flag) {
+            state.osakeModal = flag;
         }
     },
     actions: {

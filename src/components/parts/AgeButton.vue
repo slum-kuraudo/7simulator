@@ -70,7 +70,7 @@ export default {
         computed: {
             enteredValue() {
                 return this.$store.state.enteredValue;
-            }
+            },
         }
     }
 }

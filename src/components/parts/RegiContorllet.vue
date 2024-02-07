@@ -83,6 +83,7 @@ export default {
         },
         outsideClick() {
         },
+        
         closeModal() {
             this.cancelModal = false;
             this.$store.commit('setShowModal', false);

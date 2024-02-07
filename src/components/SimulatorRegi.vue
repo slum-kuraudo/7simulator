@@ -50,7 +50,7 @@
                                     <div v-if="osake" class="text-white text-xl">
                                         年齢確認のご協力をお願いします。実際の業務ではお客様の画面に「はい」ボタンが表示されているので<br>
                                         お客様に押させてから店員側でも年齢を推定してはいを押してください。
-                                        <div class="text-2xl">{{ twentyYearsAgo }}</div>
+                                        <div class="text-4xl text-red-500">{{ twentyYearsAgo }}</div>
                                     <button @click="closeOsakeModal"
                                         class="sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
                                         はい</button>
@@ -195,12 +195,23 @@ import moment from 'moment';
 export default {
     data() {
         return {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Access-Control-Allow-Origin': '*',
+            },
             details: [],
             selectedDetail: null,
             showModal: false,
             osakeModal: false,
             twentyYearsAgo: moment().subtract(20, 'years').format('YYYY-MM-DD')
         }
+    },
+    props:{
+        stage:{
+            type: Number,
+            default: null
+        },
+        
     },
     components: {
         TimeDisplay,
@@ -220,7 +231,7 @@ export default {
         closeOsakeModal(){
             this.$emit('modalclosed')
             this.osakeModal = false
-            this.$refs.regiProduct.addosakeproduct({name:'Haineken',price:200,quantity:1})
+            this.$store.commit('setOsakeModal', true)
         },
         async fetchData() {
             this.osakeModal = false
@@ -245,7 +256,8 @@ export default {
     computed: {
         currentStage() {
             return this.$route.params.stage
-        }
+        },
+        
 
     },
 

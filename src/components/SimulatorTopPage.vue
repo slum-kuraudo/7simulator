@@ -7,6 +7,6 @@
         <!-- ボタン群 -->
         <button @click="() => $router.push({path: '/stage'})" type = "button" class="bg-orange-500 text-white rounded-lg py-4 px-9 mb-7 text-lg " >スタート</button>
 
-        <button @click="() => $router.push({path: '/regi'})" class="bg-orange-500 text-white rounded-lg py-5 px-9 text-lg" type="button">実装モード</button>
+        <button @click="() => $router.push({path: '/regi'})" class="bg-orange-500 text-white rounded-lg py-5 px-9 text-lg" type="button">業務モード</button>
     </body>
 </template>

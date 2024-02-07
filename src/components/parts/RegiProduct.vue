@@ -62,23 +62,23 @@
                         class="px-4 py-2 bg-white border rounded border-gray-300">{{
                             modalContent.pro4 }}<br>{{ modalContent.pro4price }}円<br></button>
                 </div>
-                <!-- Text Section -->
-                <div class="flex justify-between mb-8">なんか書く</div>
-                
+
             </div>
         </div>
     </div>
-    <input type="text" autofocus v-model="janCode"  @keyup.enter="fetchProductData" ref="janCodeInput" style="display:none;">
+    <div>バーコードリーダーを使用する際は下のフィールドをクリックしてください</div>
+    <input type="text" inputmode="url" style="border-color: black;" autofocus v-model="janCode" @keyup.enter="fetchProductData" ref="janCodeInput">
 </template>
 <script>
 import db from '../../main'
 import { doc, getDoc, } from "firebase/firestore";
-import { axios } from 'axios'
+import axios from 'axios'
 // import AgeButton from './AgeButton.vue';
 export default {
     name: 'RegiProduct',
     data() {
         return {
+            
             janCode: "",
             products: [],
             regiflag: false,
@@ -105,16 +105,15 @@ export default {
         },
         buttonflag() {
             return this.$store.state.buttonFlag
+        },
+        setOsakeModal(){
+            return this.$store.state.osakeModal
         }
     },
     methods: {
         closeModal() {
             this.isModalOpen = false;
             this.modalContent = {};
-        },
-        addosakeproduct(product){
-            this.products.push(product)
-            this.$store.commit('setProducts', this.products)
         },
         outsideClick() {
         },
@@ -126,6 +125,23 @@ export default {
             // 該当する要素がない場合は空のオブジェクトを返す
             return {};
         },
+        osakeProduct(){
+            if(this.setOsakeModal == true){
+                const name = 'アサヒスーパードライ';
+                const price = 210;
+            const existingProduct = this.products.find(product => product.name === name);
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                this.products.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            this.$store.commit('setProducts', this.products)
+        }
+    },
         async getProductData(productType) {
             this.isModalOpen = true;
             try {
@@ -142,32 +158,37 @@ export default {
             }
         },
         async fetchProductData() {
-            const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${this.janCode}`         
-            try{
+            const url = `/ShoppingWebService?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${this.janCode}`
+            this.janCode = "";
+            //const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${this.janCode}`
+            try {
                 const response = await axios.get(url);
                 const items = response.data.hits;
                 console.log(items)
-                // if (items.length > 0) {
-                //     const item = items[0];
-                //     const name = item.name;
-                //     const price = item.price;
-                //     const existingProduct = this.products.find(product => product.name === name);
-                //     if (existingProduct) {
-                //         existingProduct.quantity++;
-                //     } else if (name && price) {
-                //         this.products.push({
-                //             name: name,
-                //             price: price,
-                //             quantity: 1
-                //         });
-                //     }
-                //     this.$store.commit('setProducts', this.products)
-                //     this.$store.commit('totalAmount', this.totalAmount);
-                // }
-            }catch{
-                console.log('error')
+                console.log(items[0].name)
+                console.log(items[0].price)
+                if (items.length > 0) {
+                    const item = items[0];
+                    const name = item.name;
+                    const price = item.price;
+                    const existingProduct = this.products.find(product => product.name === name);
+                    if (existingProduct) {
+                        existingProduct.quantity++;
+                    } else if (name && price) {
+                        this.products.push({
+                            name: name,
+                            price: price,
+                            quantity: 1
+                        });
+                    }
+                    this.$store.commit('setProducts', this.products)
+                    this.$store.commit('totalAmount', this.totalAmount);
+                    
+                }
+            } catch (error) {
+                console.log('error', error)
             }
-            
+
 
         },
         save(modalContent, productName) {
@@ -204,8 +225,7 @@ export default {
     },
     mounted() {
         this.$refs.janCodeInput.focus();
-    }
-
+    },
 }
 
 </script>
