@@ -1,6 +1,8 @@
 <template>
     <body>
         <div class="grid grid-cols-2 h-screen">
+            <button @click="() => $router.push({ path: '/' })"
+            class="absolute bg-orange-500 text-white rounded-lg font-bold text-4xl left-0 bottom-0 py-2 px-3">トップページに戻る</button>
             <div class="bg-gray-100">
                 <div class="bg-green-500 rounded-lg p-4">
                     <!-- Your tutorial content goes here -->
