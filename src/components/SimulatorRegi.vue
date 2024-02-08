@@ -6,7 +6,8 @@
                     <div class="text-white text-6xl font-bold text-center">
                         各ボタンの機能を見てみよう<br>
                         各ボタンをクリックしてみてください
-                        <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
+                        <button @click="complete"
+                            class="bg-red-500 rounded px-4 py-2">完了</button>
                         <p class="text-white text-2xl">
                         </p>
                     </div>
@@ -19,12 +20,11 @@
                     <p class="text-white text-2xl">では、実際にやってみましょう。商品を読み込んでみましょう。<br>
                         <br>
                         すると値段が表示されます。お客様からお金を預かったら金額を入力してみましょう。<br>
-                        TODO:ここで画像をだす
                         <br>
                         お客様の性別と年齢を大体でいいので推定してそれに合ったボタンを押すと会計完了です。<br>
                         <br>
                     </p>
-                    <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
+                    <button @click="complete" class="bg-red-500 rounded px-4 py-2">完了</button>
                 </div>
             </div>
             <div v-if="currentStage === '2'">
@@ -40,24 +40,23 @@
                         <div>
                             <button @click="osake"
                                 class="w-full sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
-                            お酒
+                                お酒
                             </button>
-                                <div 
-                                    class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
-                                </div>
-                                <div v-if="osakeModal"
-                                    class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
-                                    <div v-if="osake" class="text-white text-xl">
-                                        年齢確認のご協力をお願いします。実際の業務ではお客様の画面に「はい」ボタンが表示されているので<br>
-                                        お客様に押させてから店員側でも年齢を推定してはいを押してください。
-                                        <div class="text-4xl text-red-500">{{ twentyYearsAgo }}</div>
+                            <div class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
+                            </div>
+                            <div v-if="osakeModal"
+                                class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
+                                <div v-if="osake" class="text-white text-xl">
+                                    年齢確認のご協力をお願いします。実際の業務ではお客様の画面に「はい」ボタンが表示されているので<br>
+                                    お客様に押させてから店員側でも年齢を推定してはいを押してください。
+                                    <div class="text-4xl text-red-500">{{ twentyYearsAgo }}</div>
                                     <button @click="closeOsakeModal"
                                         class="sm:w-1/8 bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
                                         はい</button>
-                                    </div>
                                 </div>
                             </div>
-                                <p class="text-white text-2xl">
+                        </div>
+                        <p class="text-white text-2xl">
                             すると年齢確認に関するポップアップがお客様と店員側に表示されるので最初にお客様には画面を読んでもらって必ずお客様自身で「はい」ボタンを押させるようにしましょう
                             <br>
                             このボタンを押させる事は警察庁からの指導なので必ずお客様側で押させてください
@@ -65,22 +64,34 @@
                             未成年だと思われる方には年齢確認を行いましょう。「はい」ボタンを押すと今日から20年前の日付が表示されるので参考にして年齢確認を行いましょう。
                             <br>
                             未成年だった場合販売してはいけません。また、身分証の提示を拒否する方にも販売してはいけません。もし販売すると店員側に罰則が行く可能性があります。
-                                </p>
+                        </p>
                     </h2>
-                    <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
+                    <button @click="complete" class="bg-red-500 rounded px-4 py-2">完了</button>
                 </div>
             </div>
-            <div v-if="currentStage === '3' ">
+            <div v-if="currentStage === '3'">
                 <div class="bg-green-500 rounded-lg p-4">
-                    <h2 class="text-white text-6xl">フライヤーや中華まん、雑誌の販売をしてみよう<br></h2>
+                    <h2 class="text-white font-bold text-center text-6xl">フライヤーや中華まん、雑誌の販売をしてみよう<br></h2>
                     <p class="text-white text-2xl">
                         レジ袋やフライヤー商品、中華まんなどは会計金額の下の8つ並んでいるボタンから選択できます。<br>
                         お客様にレジ袋がいるか聞き、注文されたら選択しましょう。<br>
                         それぞれのボタンを押すと商品が登録されます。
                     </p>
-                    <button @click="() => $router.push({path: '/stage'})" class="bg-red-500 rounded px-4 py-2">完了</button>
+                    <button @click="complete" class="bg-red-500 rounded px-4 py-2">完了</button>
+                </div>
             </div>
-        </div>
+            <div v-if="currentStage === '4'">
+                <div class="bg-green-500 rounded-lg p-4">
+                    <h2 class="text-white font-bold text-center text-6xl">取消作業をしてみよう<br></h2>
+                    <p class="text-white text-2xl">
+                        お客様が「この商品やっぱキャンセルで」などと言われることがあります。<br>
+                        その場合は「取消」ボタンを押して商品を選択しましょう。<br>
+                        このシミュレーターでは商品を登録してから取消ボタンを押してみてください。<br>
+                        すると、現在登録されている商品が表示されますので、キャンセルしたい商品を選択しましょう。
+                    </p>
+                    <button @click="complete" class="bg-red-500 rounded px-4 py-2">完了</button>
+                </div>
+            </div>
         </div>
 
 
@@ -132,8 +143,25 @@
                             class="w-32 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">チケット</button>
                         <button
                             class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">領収書</button>
-                        <button
+                        <button @click="CG"
                             class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">CG</button>
+                        <div v-if="CGModal" class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
+                            <div
+                                class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h1 class="text-4xl font-bold">CG</h1>
+                                    <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">確定</button>
+                                </div>
+                                <ul>
+                                    <li v-for="(product, index) in products" :key="index">
+                                        <button @click="removeProduct(index)"
+                                            class="bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
+                                            商品名:{{ product.name }} 価格:{{ product.price }}円<br>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <button
                             class="w-32 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">返品</button>
                         <button
@@ -203,15 +231,17 @@ export default {
             selectedDetail: null,
             showModal: false,
             osakeModal: false,
+            
+            CGModal: false,
             twentyYearsAgo: moment().subtract(20, 'years').format('YYYY-MM-DD')
         }
     },
-    props:{
-        stage:{
+    props: {
+        stage: {
             type: Number,
             default: null
         },
-        
+
     },
     components: {
         TimeDisplay,
@@ -225,13 +255,15 @@ export default {
             this.showModal = false
             this.selectedDetail = null
         },
-        osake(){
+        osake() {
             this.osakeModal = true
         },
-        closeOsakeModal(){
-            this.$emit('modalclosed')
+        closeOsakeModal() {
             this.osakeModal = false
             this.$store.commit('setOsakeModal', true)
+        },
+        CG() {
+            this.CGModal = true
         },
         async fetchData() {
             this.osakeModal = false
@@ -251,13 +283,24 @@ export default {
         },
         log() {
             console.log(this.$route.params.stage)
+        },
+        complete(){
+            this.$store.commit('setComplete', true)
+            this.$router.push({ path: '/stage' });
         }
     },
     computed: {
         currentStage() {
             return this.$route.params.stage
         },
-        
+        products() {
+            return this.$store.state.products;
+        },
+        osakeFlag() {
+            return this.$store.state.osake
+        },
+
+
 
     },
 
@@ -285,4 +328,5 @@ export default {
     /* スクロールエリアの高さ */
     overflow-y: auto;
     /* 縦方向にスクロール可能に設定 */
-}</style>
+}
+</style>

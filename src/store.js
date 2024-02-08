@@ -11,7 +11,8 @@ export const store = createStore({
         date: '',
         buttonFlag: false,
         showModal: false,
-        osakeModal: false,
+        osake: false,
+        complete: false,
     },
     mutations: {
         setShowModal(state, value) {
@@ -33,7 +34,13 @@ export const store = createStore({
             state.buttonFlag = flag;
         },
         setOsakeModal(state, flag) {
-            state.osakeModal = flag;
+            state.osake = flag;
+        },
+        removeProduct(state, index) {
+            state.products.splice(index, 1);
+        },
+        setComplete(state, flag) {
+            state.complete = flag;
         }
     },
     actions: {

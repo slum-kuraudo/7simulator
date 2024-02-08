@@ -106,8 +106,11 @@ export default {
         buttonflag() {
             return this.$store.state.buttonFlag
         },
-        setOsakeModal(){
-            return this.$store.state.osakeModal
+        addOsake(){
+            return this.$store.state.osake
+        },
+        Complete(){
+            return this.$store.state.complete
         }
     },
     methods: {
@@ -125,23 +128,6 @@ export default {
             // 該当する要素がない場合は空のオブジェクトを返す
             return {};
         },
-        osakeProduct(){
-            if(this.setOsakeModal == true){
-                const name = 'アサヒスーパードライ';
-                const price = 210;
-            const existingProduct = this.products.find(product => product.name === name);
-            if (existingProduct) {
-                existingProduct.quantity++;
-            } else {
-                this.products.push({
-                    name: name,
-                    price: price,
-                    quantity: 1
-                });
-            }
-            this.$store.commit('setProducts', this.products)
-        }
-    },
         async getProductData(productType) {
             this.isModalOpen = true;
             try {
@@ -220,12 +206,30 @@ export default {
             if (!product.price || !product.quantity) return '';
             return (product.price * product.quantity * 1.08).toFixed(0);
         }
-
-
     },
     mounted() {
         this.$refs.janCodeInput.focus();
     },
+    watch:{
+        addOsake(){
+            if (this.addOsake == true) {
+                this.products.push({
+                    name: 'アサヒスーパードライ',
+                    price: 210,
+                    quantity: 1
+                });
+                this.$store.commit('setProducts', this.products)
+                this.$store.commit('totalAmount', this.totalAmount);
+                this.$store.commit('setOsake', false);
+                
+            }
+        },
+        Complete(){
+            this.products = [];
+            
+        }
+    
+    }
 }
 
 </script>

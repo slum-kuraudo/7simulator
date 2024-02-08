@@ -7,14 +7,21 @@
         </button>
     </div>
     <div v-if="cancelModal" class="inset-0 right-top bg-opacity-50 overflow-y-auto h-full w-full">
-        <div class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
-            <div class="flex justify-between items-center mb-4">
-                <h1 class="text-4xl font-bold">取消</h1>
-                <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">確定</button>
-                
-            </div>
+    <div class="modal-content custom-modal-height mx-auto p-4 border shadow-lg rounded-md bg-orange-400">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-4xl font-bold">取消</h1>
+            <button @click="closeModal" class="px-4 py-2 bg-gray-300 rounded">戻る</button>
         </div>
+        <ul>
+            <li v-for="(product, index) in products" :key="index">
+                <button @click="removeProduct(index)"
+                    class="bg-gray-300 hover:bg-gray-700 text-black font-bold py-1 px-4 rounded">
+                    商品名:{{ product.name }} 価格:{{ product.price }}円<br>
+                </button>
+            </li>
+        </ul>
     </div>
+</div>
 
 
 
@@ -76,14 +83,18 @@ export default {
             } else if (action === 'recipt') {
                 alert('店舗名が書かれた短いレシートが出力されます。\nこのボタンは滅多に使わないので、今回は実装しません。')
             }
-        if(action == 'back'){
-            this.cancelModal = true;
-        }
-        
+            if (action == 'back') {
+                this.cancelModal = true;
+
+            }
+
+        },
+        removeProduct(index) {
+            this.$store.commit('removeProduct', index);
         },
         outsideClick() {
         },
-        
+
         closeModal() {
             this.cancelModal = false;
             this.$store.commit('setShowModal', false);
@@ -100,8 +111,18 @@ export default {
         products() {
             return this.$store.state.products;
         },
+        Complete(){
+            return this.$store.state.complete;
         }
+    },
+    watch: {
+        Complete() {
+            if (this.Complete == true) {
+                this.enteredValue = '';
+        }
+    }   
     }
+}
 </script>
 
 <style>
