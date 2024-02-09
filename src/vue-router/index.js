@@ -1,5 +1,8 @@
 import SimulatorTop from '../components/SimulatorTopPage.vue'
 import StageSelect from '../components/StageSelect.vue'
+import Regi7 from '../components/SimulatorRegi.vue'
+import SimulatorRegi from '../components/SimulatorRegi.vue'
+import ButtonStage from '../components/ButtonStage.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 
 
@@ -13,6 +16,23 @@ import { createRouter, createWebHistory } from 'vue-router';
             path: '/stage',
             name: "StageSelect",
             component: StageSelect
+        },
+        {
+            path: '/regi',
+            name: 'Regi',
+            component: Regi7,
+            props: true
+        },
+        {
+            path: '/simulator-regi:stage',
+            name: 'SimulatorRegi',
+            component: SimulatorRegi,
+            props: true
+        },
+        {
+            path: '/ButtonStage',
+            name: 'ButtonStage',
+            component: ButtonStage,
         }
     ];
 

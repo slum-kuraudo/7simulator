@@ -1,23 +1,21 @@
 # 7simulator
 
-## Project setup
+# 実装する機能
 ```
-yarn install
-```
+・デザインの調整
+・レジ機能の再現
+    現金・電子マネー会計
+        電子マネー会計
+    フライヤー販売・廃棄
+        販売システム完成・廃棄はまだ
+    チケット・CG・nanaco
+        まだ
+    
+    
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+・シミュレーターモードの実装
+    とりあえず二つは実装する。
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
 ```
 
 ### Customize configuration
