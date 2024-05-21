@@ -5,13 +5,6 @@ module.exports = defineConfig({
 
 module.exports = {
   devServer: {
-    proxy: {
-      '/ShoppingWebService': {
-        target: 'https://shopping.yahooapis.jp',
-        changeOrigin: true,
-        pathRewrite: { '^/ShoppingWebService': '/ShoppingWebService/V3/itemSearch' },
-      },
-    },
-  },
-  transpileDependencies: true,
-};
+    port: 8081  
+  }
+}

@@ -10,6 +10,9 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import store from './store.js';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import axios from 'axios'
+axios.defaults.withCredentials = true; 
+axios.defaults.xsrfHeaderName = "X-CSRF-Token";
 const firebaseConfig = {
     apiKey: "AIzaSyAxsHS64aqsoe4LVBIfzMIzwSXv3OzVavo",
     authDomain: "simulator-95b6b.firebaseapp.com",
