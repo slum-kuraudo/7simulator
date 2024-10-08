@@ -73,6 +73,7 @@
 import db from '../../main'
 import { doc, getDoc, } from "firebase/firestore";
 import axios from 'axios'
+
 // import AgeButton from './AgeButton.vue';
 export default {
     name: 'RegiProduct',
@@ -135,7 +136,6 @@ export default {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     this.modalContent = docSnap.data();
-                    // this.save(this.modalContent);
                 } else {
                     console.log("No such document!");
                 }
@@ -145,8 +145,8 @@ export default {
         },
         async fetchProductData() {
             const url = `/ShoppingWebService?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${this.janCode}`
-            this.janCode = "";
             //const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${this.janCode}`
+            this.janCode = "";
             try {
                 const response = await axios.get(url);
                 const items = response.data.hits;

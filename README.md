@@ -1,21 +1,9 @@
-# 7simulator
+# 7simulator.com
 
-# 実装する機能
-```
-・デザインの調整
-・レジ機能の再現
-    現金・電子マネー会計
-        電子マネー会計
-    フライヤー販売・廃棄
-        販売システム完成・廃棄はまだ
-    チケット・CG・nanaco
-        まだ
-    
-    
+商品を読み取るには外付けのバーコードリーダーを使用します。
 
-・シミュレーターモードの実装
-    とりあえず二つは実装する。
-
+使用した技術
+VueJS firebase(Hosting firestore)
 ```
 
 ### Customize configuration
