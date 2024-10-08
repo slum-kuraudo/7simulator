@@ -195,8 +195,6 @@
                             <button
                                 class="w-16 h-16 m-1 bg-green-500 text-white rounded hover:bg-blue-600 col-span-2">ポイント交換
                                 <div class="tooltip">
-                                    <!-- &lt;div class=&quot;tooltip_message&quot;&gt;nanacoのポイントを交換できるようになります
-                                  &lt;/div&gt; -->
                                 </div>
                             </button>
                             <button @click="chargealert"
