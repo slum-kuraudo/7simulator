@@ -14,7 +14,7 @@ app.use(cors(corsOptions));  // CORSを有効にする
 app.get('/proxy', async (req, res) => {
     try {
         const janCode = req.query.jan_code;
-        const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid=dj00aiZpPXV1emVrWlZUblM0SiZzPWNvbnN1bWVyc2VjcmV0Jng9NDI-&jan_code=${janCode}`;
+        const url = `https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch?appid={}&jan_code=${janCode}`;
         const response = await axios.get(url);
         res.json(response.data);
     } catch (error) {
